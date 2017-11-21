@@ -1,0 +1,13 @@
+PHP rename()函数可以实现重命名或者移动到其他目录下，success返回true，失败返回false。
+
+copy 
+rename(oldname,newname,context) 参数说明 oldname 必需。规定要重命名的文件或目录。 newname 必需。规定文件或目录的新名称。 context 可选。规定文件句柄的环境。context 是可修改流的行为的一套选项。 注释： 在 PHP 4.3.3 之前，rename() 不能在基于 *nix 的系统中跨磁盘分区重命名文件。 用于 oldname 中的封装协议必须和用于 newname 中的相匹配。 对 context 的支持是 PHP 5.0.0 添加的。 例如： <?php //把当前目录下的images.txt文件移动到test目录下并改名为pictures.txt rename("images.txt","test/pictures.txt"); ?>
+
+使用问题
+1.文件可以在不同盘之间移动
+2.空文件需要判断，不存在即创建
+3.非空文件夹只能在同一个盘符下移动
+copy：
+经测试过, 一个40M的文件, copy+unlink方式需要7.6249899864197秒
+而rename方式,只需要0.024738788604736,快300倍.
+因此,谨慎使用copy+unlink方式.
