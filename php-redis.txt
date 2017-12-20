@@ -1,0 +1,116 @@
+[redis版本号中间位是偶数的是稳定版，奇数的为非稳定版]
+1.官网下载redis
+去官网http://redis.io ，也可通过wget命令，
+wget http://download.redis.io/redis-stable.tar.gz
+2.解压缩
+tar –zxvf redis-stable.tar.gz
+3.编译，安装
+cd redis-stable
+make 
+gcc command不识别，请自行安装gcc；
+如果提示couldn’t execute tcl : no such file or dicrectory，请自行安装tcl;
+如果提示
+jemalloc/jemalloc.h :No such file or directory
+"Newer version of jemalloc required"
+请执行make distclean，然后再make
+可手动拷贝redis-server、redis-cli、redis-check-aof、redis-check-dump等至/usr/local/bin目录下，也可执行make install，此处执行make install,建议执行make install 
+注意：若此时执行redis-server –v (查看版本命令)，若提示redis-server command not found，则需要将/usr/local/bin目录加到环境变量，如何添加，此处不做详细介绍，可查看修改/etc/profile，(查看环境变量命令：echo $PATH)
+4.修改配置文件.conf
+cd /etc/
+mkdir redis
+ll 查看创建的redis目录
+dump file、进程pid、log目录等，一般放在/var/目录下，
+cd /var/
+mkdir redis
+cd redis
+mkdir data log run
+至此，目录创建完毕
+
+首先拷贝解压包下的redis.conf文件至/etc/redis
+查看/etc/redis/redis.conf
+cd /etc/redis/
+ll
+打开redis.conf文件
+修改端口(默认6379)
+port 6379
+修改pid目录为新建目录
+pidfile /var/redis/run/redis.pid(注意这里的redis.pid 可写成redis_6379.pid)
+修改dump目录为新建目录
+dir /var/redis/data
+修改log存储目录为新建目录
+logfile /var/redis/log/redis.log
+启动redis，查看各目录下文件
+redis-server /etc/redis/redis.conf
+停止redis服务，修改配置文件使得redis在background运行
+daemonize no
+改成yes，保存，重启redis服务
+5.服务及开机自启动
+拷贝解压包下utils下redis启动脚本至/etc/init.d/
+cp redis_init_script /etc/init.d/
+修改脚本名称为redis
+查看 ll
+
+修改脚本pid及conf路径为实际路径
+PIDFILE = /var/redis/run/redis.pid
+CONF ='/etc/redis/redis.conf'
+生产环境下，配置时，配置文件、pid等最好加上端口标识，以便区分
+保存
+退出
+至此，在/etc/init.d/目录下，已经可以通过service redis start/stop 命令启动和关闭redis
+添加脚本权限
+chmod +x /etc/init.d/redis
+相应的删除权限是
+chmod -x /etc/init.d/redis
+设置自启动
+chkconfig redis on
+此时会出现运行报错 ，是因为没有在启动脚本里加入redis启动优先级信息，可添加如下
+#chkconfig： 2345 90 10
+#description：Redis is a persistent key-value database
+chkconfig redis on 
+
+
+安装 php扩展
+
+下载：https://github.com/nicolasff/phpredis/archive/2.2.4.tar.gz
+
+上传phpredis-2.2.4.tar.gz到/usr/local/src目录
+
+cd /usr/local/src #进入软件包存放目录
+
+tar zxvf phpredis-2.2.4.tar.gz #解压
+
+cd phpredis-2.2.4 #进入安装目录
+
+/usr/local/php/bin/phpize #用phpize生成configure配置文件，目录可能不同。phpize是php中bin目录下的一个可执行文件，所有要先找到对应的目录。
+
+./configure --with-php-config=/usr/local/php/bin/php-config  #配置，注意要先确保/usr/local/php/bin/php-config存在。对应php的bin目录下的php-config
+
+make  #编译
+
+make install  #安装
+
+安装完成之后，出现下面的安装路径
+
+/usr/local/php/lib/php/extensions/no-debug-non-zts-20090626/
+
+也可能出现
+Installing shared extensions:     /usr/lib64/php/modules/
+
+这个是的正常，继续下面的。
+
+2、配置php支持
+
+vi /usr/local/php/etc/php.ini  #编辑配置文件，在最后一行添加以下内容
+
+添加
+
+extension="redis.so"
+
+:wq! #保存退出
+
+重新启动httpd------------->ok
+
+[1] http://blog.csdn.net/ludonqin/article/details/47211109 安装redis
+[2] https://www.cnblogs.com/sss-justdDoIt/p/5632004.html 安装php 扩展
+[3] www.runoob.com/redis/redis-php.html php 使用redis
+
