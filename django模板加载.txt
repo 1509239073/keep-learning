@@ -1,0 +1,24 @@
+1.create project testdj
+2.create app blog
+3 from django.shortcuts import render,render_to_response
+4 模板放在blog/templates 下面
+5 return render_to_response('index.html',{})，return render(req,'index.html',{'name':'zbw','age':24})
+6 模板变量 
+7：发现了个问题，发现copy过来的Python代码都没有进行缩进，当我们copy别人的代码时，缩进这点需要额外注意。不要看起来代码缩进了就感觉ok了，实际上是没有缩进的。
+8 点语法 什么都可以操作 
+9 条件标签if 和循环标签for
+{% if condition %}
+     ... display
+{% endif %}
+
+{% if condition1 %}
+   ... display 1
+{% elif condition2 %}
+   ... display 2
+{% else %}
+   ... display 3
+{% endif %}
+
+{% if athlete_list and coach_list %}
+     athletes 和 coaches 变量都是可用的。
+{% endif %}

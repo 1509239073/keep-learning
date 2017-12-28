@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<head>
+	<title>tai_xing_ django</title>
+</head>
+<body>
+ <h1>hello world {{ book_list }}</h1>
+ <h2>{{user.say}}</h2>
+ {% if user.age < 33 %}
+ <li>{{user.name}}</li>
+ {% else %}
+ <li>111</li>
+ {% endif %}
+
+ {% for v in book_list %}
+ {#序号#}
+ {% empty %}
+ <li>{{forloop.counter}}{{v}}</li>
+ {% endfor %}
+ <!-- {% for k,v in user.items %}
+ <li>{{k}}:{{v}}</li>
+ {% endfor %} -->
+
+</body>
+</html>
