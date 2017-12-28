@@ -1,0 +1,10 @@
+1. pip install Django
+2. django-admin.py startproject testdj //创建项目
+3. python manage.py runserver 启动服务
+4. 访问地址为http://127.0.0.1:8000/。
+5. 配置
+TIME_ZONE = 'Asia/Shanghai'
+LANGUAGE_CODE = 'zh-cn'
+添加应用blog
+6. django-admin.py startapp  blog //创建应用
+7.url 127.0.0.1:8000
