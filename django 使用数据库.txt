@@ -1,0 +1,29 @@
+准备工作 sudo pip install mysqlclient 依赖关系
+1.创建django project django-admin.py startproject testdj
+2.创建django app django-admin.py startapp  blog
+3.修改settings INSTALLED_APPS DATABASES
+4. 通过orm 对象关系模型
+5. 1.9版本之后 python manage.py syncdb python manage.py migrate
+6.
+$ python manage.py migrate   # 创建表结构
+$ python manage.py makemigrations blog  # 让 Django 知道我们在我们的模型有一些变更
+$ python manage.py migrate blog   # 创建表结构
+数据
+# emps = Employee.objects.all()
+# return render_to_response('dbTest.html',{'emps':emps})
+# 添加数据
+# test1 = Employee(name='11111')
+# test1.save()
+#emps = Employee.objects.all()
+# filter相当于SQL中的WHERE，可设置条件过滤结果
+#emps = Employee.objects.filter(id=1,name='cha')
+#-name 排序
+#emps = Employee.objects.order_by('-name')[0:2]
+#emps = Employee.objects.get(id=1)
+# test1 = Employee.objects.get(id=1)
+# test1.name ='iosPhone'
+# test1.save()
+#Employee.objects.filter(id=1).update(name='goodGame')
+#Employee.objects.all().update(name='goodGame')
+#删除即把所有的update 改成delete
+ex:所有代码测试有效

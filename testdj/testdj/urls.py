@@ -21,5 +21,6 @@ from blog import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^blog/index/$',views.index),
+    url(r'^blog/dbTest/$',views.dbTest),
     #url(r'^blog/index/(?P<id>\d{2})/$',views.index),
 ]
