@@ -1,0 +1,12 @@
+from django.shortcuts import render,render_to_response
+from django.http import HttpResponse
+from django.template import loader,Context,Template
+
+1.t = loader.get_template('index.html')
+  c = Context({'uname':'tim'})
+  return HttpResponse(t.render(c))
+2.t =Template('<h1>hello {{uname}}</h1>')
+  c = Context({'uname':'tim'})
+  return HttpResponse(t.render(c))
+3.return render_to_response('index.html',{'book_list':book_list,'user':user})
+总结：1，2不合适，直接用render_to_response()

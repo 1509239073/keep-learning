@@ -16,8 +16,8 @@ class Person(object):
 #     context['hello'] = 'Hello World!'
 #     return render(req, 'index.html', context)
 # 	#return HttpResponse('<h1>hello world!!!<h1>')
-def index(req,id):
+def index(req):
 	user =Person('max',33,'male')
 	# user =''
 	book_list = [1,2,3,4]
-	return render_to_response('index.html',{'book_list':book_list,'user':user,'id':id})
+	return render_to_response('index.html',{'book_list':book_list,'user':user})
