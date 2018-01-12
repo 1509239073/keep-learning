@@ -41,7 +41,7 @@ def dbTest(req):
 	#Employee.objects.filter(id=1).update(name='goodGame')
 	#Employee.objects.all().update(name='goodGame')
 	#删除即把所有的update 改成delete
-	return render_to_response('dbTest.html',{'emps':test1})
+	return render_to_response('dbTest.html',{'emps':'111'})
 	
 	
 
